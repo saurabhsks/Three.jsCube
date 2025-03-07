@@ -81,6 +81,39 @@
 
 
 
+// import React, { useRef } from "react";
+// import { Canvas, useFrame } from "@react-three/fiber";
+// import * as THREE from "three";
+
+// const Cube: React.FC = () => {
+//   const meshRef = useRef<THREE.Mesh>(null);
+
+//   useFrame(() => {
+//     if (meshRef.current) {
+//       meshRef.current.rotation.x += 0.02;
+//       meshRef.current.rotation.y += 0.02;
+//     }
+//   });
+
+//   return (
+//     <mesh ref={meshRef}>
+//       <boxGeometry args={[1, 1, 1]} />
+//       <meshBasicMaterial color="green" />
+//     </mesh>
+//   );
+// };
+
+// const ThreeCube: React.FC = () => {
+//   return (
+//     <Canvas style={{ width: "100%", height: "100%" }}>
+//       <Cube />
+//     </Canvas>
+//   );
+// };
+
+// export default ThreeCube;
+
+
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -98,17 +131,21 @@ const Cube: React.FC = () => {
   return (
     <mesh ref={meshRef}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshBasicMaterial color="green" />
+      <meshStandardMaterial color="green" />
     </mesh>
   );
 };
 
 const ThreeCube: React.FC = () => {
   return (
-    <Canvas style={{ width: "100%", height: "100%" }}>
+    <Canvas style={{ width: "100vw", height: "100vh" }}>
+      {/* Lights are necessary for meshStandardMaterial */}
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[2, 2, 2]} />
       <Cube />
     </Canvas>
   );
 };
 
 export default ThreeCube;
+
